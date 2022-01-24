@@ -1,61 +1,62 @@
 # Maintainer: Zion Nimchuk <zionnimchuk@gmail.com>
 # Submitter: Maxime Gauduin <alucryd@archlinux.org>
+# Contributor: Michele Beccalossi <michele.beccalossi@protonmail.com>
 
 pkgname=rpcs3-git
 pkgver=0.0.20.13150.bba528e2a
 pkgrel=1
-pkgdesc='A Sony PlayStation 3 emulator'
-arch=(x86_64)
-url=https://github.com/RPCS3/rpcs3
-license=(GPL2)
+pkgdesc="A Sony PlayStation 3 emulator"
+arch=('x86_64')
+url="https://github.com/RPCS3/rpcs3"
+license=('GPL2')
 depends=(
-  alsa-lib
-  glew
-  glu
-  libavcodec.so
-  libavutil.so
-  libevdev
-  libgl
-  libice
-  libncursesw.so
-  libpng
-  libpulse
-  libsm
-  libswscale.so
-  libx11
-  libxext
-  openal
-  qt5-base
-  qt5-declarative
-  qt5-multimedia
-  qt5-svg
-  sdl2
-  vulkan-icd-loader
-  zlib
-  curl
-  wolfssl
-  flatbuffers
-  pugixml
+  'alsa-lib'
+  'glew'
+  'glu'
+  'libavcodec.so'
+  'libavutil.so'
+  'libevdev'
+  'libgl'
+  'libice'
+  'libncursesw.so'
+  'libpng'
+  'libpulse'
+  'libsm'
+  'libswscale.so'
+  'libx11'
+  'libxext'
+  'openal'
+  'qt5-base'
+  'qt5-declarative'
+  'qt5-multimedia'
+  'qt5-svg'
+  'sdl2'
+  'vulkan-icd-loader'
+  'zlib'
+  'curl'
+  'wolfssl'
+  'flatbuffers'
+  'pugixml'
 )
 makedepends=(
-  cmake
-  git
-  libglvnd
-  python
-  vulkan-validation-layers
+  'cmake'
+  'git'
+  'libglvnd'
+  'python'
+  'vulkan-validation-layers'
 )
-provides=(rpcs3)
-conflicts=(rpcs3)
-options=(!emptydirs)
+provides=('rpcs3')
+conflicts=('rpcs3')
+options=('!emptydirs')
 source=(
-  git+https://github.com/RPCS3/rpcs3.git
-  rpcs3-llvm::git+https://github.com/RPCS3/llvm-mirror.git
-  git+https://github.com/KhronosGroup/glslang.git
+  'git+https://github.com/RPCS3/rpcs3.git'
+  'rpcs3-llvm::git+https://github.com/RPCS3/llvm-mirror.git'
+  'git+https://github.com/KhronosGroup/glslang.git'
 )
 sha256sums=(
-  SKIP
-  SKIP
-  SKIP
+  'SKIP'
+  'SKIP'
+  'SKIP'
 )
 
 pkgver() {
@@ -69,11 +70,11 @@ pkgver() {
 
 prepare() {
   cd rpcs3
-  
+
   git submodule init 3rdparty/glslang/glslang llvm
   git config submodule.3rdparty/glslang.url ../glslang
   git config submodule.llvm.url ../rpcs3-llvm
-  
+
   SUBMODULES=($(git config --file .gitmodules --get-regexp path | \
     awk '!/ffmpeg/ && !/libpng/ && !/zlib/ && !/curl/ && !/llvm/ && !/glslang/ && !/wolfssl/ && !/pugixml/ && !/flatbuffers/'))
 
@@ -92,7 +93,7 @@ prepare() {
     git config $urlid https://github.com/$url
     git submodule update --init --depth=1 $path
   done
-  
+
   git submodule update 3rdparty/glslang/glslang llvm
 }
 
@@ -109,7 +110,7 @@ build() {
     -DUSE_SYSTEM_WOLFSSL=ON \
     -DUSE_SYSTEM_FLATBUFFERS=ON \
     -DUSE_SYSTEM_PUGIXML=ON
-  
+
   make -C build
 }
 
