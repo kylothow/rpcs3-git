@@ -111,7 +111,7 @@ build() {
     -DUSE_SYSTEM_FLATBUFFERS=ON \
     -DUSE_SYSTEM_PUGIXML=ON
 
-  make -C build
+  make -j$(nproc) -C build
 }
 
 package() {
