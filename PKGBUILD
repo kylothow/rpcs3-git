@@ -44,6 +44,7 @@ makedepends=(
   'libglvnd'
   'python'
   'vulkan-validation-layers'
+  'clang'
 )
 provides=('rpcs3')
 conflicts=('rpcs3')
@@ -102,6 +103,8 @@ build() {
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_SKIP_RPATH=ON \
+    -DCMAKE_CXX_COMPILER=clang++ \
+    -DCMAKE_C_COMPILER=clang \
     -DUSE_NATIVE_INSTRUCTIONS=OFF \
     -DUSE_SYSTEM_FFMPEG=ON \
     -DUSE_SYSTEM_LIBPNG=ON \
