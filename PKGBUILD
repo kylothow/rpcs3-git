@@ -7,7 +7,7 @@ pkgver=0.0.20.13230.0db9850a7
 pkgrel=1
 pkgdesc="A Sony PlayStation 3 emulator"
 arch=('x86_64')
-url="https://github.com/RPCS3/rpcs3"
+url="https://rpcs3.net"
 license=('GPL2')
 depends=(
   'alsa-lib'
