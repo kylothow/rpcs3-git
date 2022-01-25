@@ -1,0 +1,6 @@
+glslang
+pkg
+rpcs3-llvm
+rpcs3
+src
+*.pkg.tar.zst
