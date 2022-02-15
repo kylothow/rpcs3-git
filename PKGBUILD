@@ -3,7 +3,7 @@
 # Contributor: Michele Beccalossi <michele.beccalossi@protonmail.com>
 
 pkgname=rpcs3-git
-pkgver=0.0.20.13282.2d5d5746d
+pkgver=0.0.20.13284.abd8bd6f3
 pkgrel=1
 pkgdesc="A Sony PlayStation 3 emulator"
 arch=('x86_64')
