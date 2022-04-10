@@ -3,7 +3,7 @@
 # Contributor: Michele Beccalossi <michele.beccalossi@protonmail.com>
 
 pkgname=rpcs3-git
-pkgver=0.0.21.13344.167076911
+pkgver=0.0.21.13393.3002e592c
 pkgrel=1
 pkgdesc="A Sony PlayStation 3 emulator"
 arch=('x86_64')
@@ -100,6 +100,10 @@ prepare() {
 }
 
 build() {
+  # GLIBCXX_ASSERTIONS is know to cause unwanted assertions and crash rpcs3
+  BAD_FLAG="-Wp,-D_GLIBCXX_ASSERTIONS"
+  CXXFLAGS="${CXXFLAGS//$BAD_FLAG/}"
+
   cmake -S rpcs3 -B build \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr \
@@ -113,7 +117,8 @@ build() {
     -DUSE_SYSTEM_CURL=ON \
     -DUSE_SYSTEM_WOLFSSL=ON \
     -DUSE_SYSTEM_FLATBUFFERS=OFF \
-    -DUSE_SYSTEM_PUGIXML=ON
+    -DUSE_SYSTEM_PUGIXML=ON \
+    -DCMAKE_CXX_FLAGS="$CXXFLAGS -fpermissive"
 
   make -j$(expr $(nproc) / 2) -C build
 }
